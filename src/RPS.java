@@ -1,7 +1,7 @@
 /**
  * Lab 4 Rock, Paper, Scissors GUI
  * Jayden LaCombe and Lance Hoffpauer
- * 1/24/2022
+ * 1/23/2022
  */
 
 import javax.swing.*;
