@@ -224,18 +224,21 @@ public class RPS {
                     JOptionPane.showOptionDialog(null, playerWinsGame,
                             "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
                             0, 0, quitIcon, quitGame, quitGame[0]);
-                }
+                System.exit(1);}
 
                 else if (winner.equals("C")) {
 
                     String comWinsGame = "<html><h1>You lost :( <h1><html>";
                     comWinsGame += "Please click the \"Quit Game\" button to end the game";
                     comWinsGame += "Thanks For Playing! Better Luck Next Time!";
+                    comWinsGame += "Thanks For Playing! Better Luck Next Time!";
+
+
 
                     JOptionPane.showOptionDialog(null, comWinsGame,
                             "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
                             0, 0, quitIcon, quitGame, quitGame[0]);
-                }
+                System.exit(1);}
 
             }
 
