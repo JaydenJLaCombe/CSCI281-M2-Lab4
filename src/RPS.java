@@ -19,228 +19,211 @@ public class RPS {
         ImageIcon pbrIcon = new ImageIcon("Images/PBR.jpg");
         ImageIcon rbsIcon = new ImageIcon("Images/RBS.jpg");
         ImageIcon quitIcon = new ImageIcon("Images/gameOver.jpg");
-        String introPrompt = "<html><h1>Rock, Paper, Scissors<h1><html>\n";
+        String introPrompt = "<html><h1>Rock, Paper, Scissors</h1>";
 
         String[] playButton = {"Play"};
 
         int play = JOptionPane.showOptionDialog(null, introPrompt,
                 "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                0, 0, introIcon, playButton, playButton[0]); {
-        }
+                0, 0, introIcon, playButton, playButton[0]);
 
-            // Step 2 - Start Repeat
+        if (play != 0) System.exit(0);
 
-            int computerPoints = 0;
-            int playerPoints = 0;
+        // Step 2 - Start Repeat
 
-            while (computerPoints <= 3 || playerPoints <= 3) {
+        int computerPoints = 0;
+        int playerPoints = 0;
 
-                // Step 3 - Enter Player Choice of Rock Paper or Scissors
+        while (computerPoints <= 3 || playerPoints <= 3) {
 
-                String decisionPrompt = "    Please click on one of\n    The following buttons,\nCorresponding to your play\n";
-                String[] choices = {"Rock", "Paper", "Scissors"};
+            // Step 3 - Enter Player Choice of Rock Paper or Scissors
 
-                int choice = JOptionPane.showOptionDialog(null, decisionPrompt,
+            String decisionPrompt = "<html>Please click on one of<br>" + "The following buttons,<br>" + "Corresponding to your play<br>";
+            String[] choices = {"Rock", "Paper", "Scissors"};
+
+            int choice = JOptionPane.showOptionDialog(null, decisionPrompt,
+                    "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
+                    0, 0, choiceIcon, choices, choices[0]);
+
+            if (choice == -1) System.exit(0);
+
+            String playerChoice = "";
+            String computerChoice = "";
+
+            // Step 4 - Translate Player Choice
+
+            switch (choice) {
+                case 2 -> playerChoice = "Scissors";
+                case 1 -> playerChoice = "Paper";
+                case 0 -> playerChoice = "Rock";
+            }
+
+
+            // Step 5 - Generate Computers Play
+
+
+            Random rand = new Random();
+            int computerMove = rand.nextInt(3);
+
+            // Step 6 - Translate Computers Choice
+
+            switch (computerMove) {
+                case 2 -> computerChoice = "Scissors";
+                case 1 -> computerChoice = "Paper";
+                case 0 -> computerChoice = "Rock";
+            }
+
+            // Step 7 - Determine Winner for this Round and Adjust Score
+
+            String decisions = "<html>You played : " + playerChoice + "<br>" +
+                    "Computer Played : " + computerChoice + "<br>";
+
+            String computerWin = "The Computer Won and has Earned a Point.";
+            String playerWin = "You Beat the Computer and Have Earned a Point!";
+            String sBp = "<h1>Scissor Cut Paper!</h1>";
+            String rBs = "<h1>Rock Crushes Scissors!</h1>";
+            String pBr = "<h1>Paper Wraps Rock!</h1>";
+
+            String rock = "Rock";
+            String paper = "Paper";
+            String scissor = "Scissors";
+
+            ImageIcon tieIcon = new ImageIcon("Images/tieGame.jpg");
+
+            int xButton = 0;
+
+            //If Statements
+
+            if (computerChoice.equals(playerChoice)) {
+
+
+                String tie = "<h2>Result is a Tie! <br>" + "No Point</h2>";
+                String tiePrompt = decisions + tie;
+
+
+                JOptionPane.showMessageDialog(null, tiePrompt,
+                        "Rock, Paper, Scissors                           J.LaCombe and L. Hoffpauer",
+                        0, tieIcon);
+
+
+            } else if (computerChoice.equals(scissor) && playerChoice.equals(paper)) {
+
+                String comBeatsPlayerSBP = decisions;
+                comBeatsPlayerSBP += computerWin;
+                comBeatsPlayerSBP += sBp;
+
+                JOptionPane.showMessageDialog(null, comBeatsPlayerSBP,
                         "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                        0, 0, choiceIcon, choices, choices[0]);
+                        0, sbpIcon);
 
-                String playerChoice = "";
-                String computerChoice = "";
+                computerPoints += 1;
 
-                // Step 4 - Translate Player Choice
 
-                switch (choice) {
-                    case 2 -> playerChoice = "Scissors";
-                    case 1 -> playerChoice = "Paper";
-                    case 0 -> playerChoice = "Rock";
-                }
+            } else if (computerChoice.equals(paper) && playerChoice.equals(rock)) {
 
+                String comBeatsPlayerPBR = decisions;
+                comBeatsPlayerPBR += computerWin;
+                comBeatsPlayerPBR += pBr;
 
-                // Step 5 - Generate Computers Play
+                JOptionPane.showMessageDialog(null, comBeatsPlayerPBR,
+                        "Rock, Paper, Scissors                      " +
+                                "                           J.LaCombe and L. Hoffpauer",
+                        0, pbrIcon);
 
+                computerPoints += 1;
 
-                Random rand = new Random();
-                int computerMove = rand.nextInt(3);
 
-                // Step 6 - Translate Computers Choice
+            } else if (computerChoice.equals(rock) && playerChoice.equals(scissor)) {
 
-                switch (computerMove) {
-                    case 2 -> computerChoice = "Scissors";
-                    case 1 -> computerChoice = "Paper";
-                    case 0 -> computerChoice = "Rock";
-                }
+                String comBeatsPlayerRBS = decisions;
+                comBeatsPlayerRBS += computerWin;
+                comBeatsPlayerRBS += rBs;
 
-                // Step 7 - Determine Winner for this Round and Adjust Score
+                JOptionPane.showMessageDialog(null, comBeatsPlayerRBS,
+                        "Rock, Paper, Scissors                      " +
+                                "                 J.LaCombe and L. Hoffpauer",
+                        0, rbsIcon);
 
-                String decisions = "\t\t      You played : " + playerChoice +
-                        "\n\t\tComputer Played : " + computerChoice + "\n";
+                computerPoints += 1;
 
-                String computerWin = "The Computer Won and has Earned a Point.";
-                String playerWin = "You Beat the Computer! You Have Earned a Point";
-                String sBp = "<html><h1>Scissor Cut Paper!<h1><html>";
-                String rBs = "<html><h1>Rock Crushes Scissors!<h1><html>";
-                String pBr = "\n<html><h1>Paper Wraps Rock!<h1><html>";
 
-                String rock = "Rock";
-                String paper = "Paper";
-                String scissor = "Scissors";
+            } else if (computerChoice.equals(paper) && playerChoice.equals(scissor)) {
 
-                ImageIcon tieIcon = new ImageIcon("Images/tieGame.jpg");
+                String playerBeatsComSBP = decisions;
+                playerBeatsComSBP += playerWin;
+                playerBeatsComSBP += sBp;
 
-                //If Statements
+                JOptionPane.showMessageDialog(null, playerBeatsComSBP,
+                        "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
+                        0, sbpIcon);
 
-                if (computerChoice.equals(playerChoice)) {
+                playerPoints += 1;
 
-                    decisions = "\t\t\t\tYou played : " + playerChoice +
-                            "\n\t\tComputer Played : " + computerChoice + "\n";
 
-                    String tiePrompt = decisions;
-                    String tie = "<html><h2>Result is a Tie!<h2><html>";
-                    String tie2 =  "\n" + "<html><h2>No Point<h2><html>" + "\n\n";
-                    tiePrompt += tie + tie2;
+            } else if (computerChoice.equals(rock) && playerChoice.equals(paper)) {
 
+                String playerBeatsComPBR = decisions;
+                playerBeatsComPBR += playerWin;
+                playerBeatsComPBR += pBr;
 
+                JOptionPane.showMessageDialog(null, playerBeatsComPBR,
+                        "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
+                        0, pbrIcon);
 
-                    JOptionPane.showMessageDialog(null, tiePrompt,
-                            "Rock, Paper, Scissors                           J.LaCombe and L. Hoffpauer",
-                            0, tieIcon);
+                playerPoints += 1;
 
 
-                } else if (computerChoice.equals(scissor) && playerChoice.equals(paper)) {
+            } else if (computerChoice.equals(scissor) && playerChoice.equals(rock)) {
 
-                    decisions = "         You played : " + playerChoice +
-                            "\n          Computer Played : " + computerChoice + "\n";
+                String playerBeatsComRBS = decisions + playerWin + rBs;
 
-                    String comBeatsPlayerSBP = "   " + decisions;
-                    comBeatsPlayerSBP += computerWin;
-                    comBeatsPlayerSBP += "\n" + sBp;
 
-                    JOptionPane.showMessageDialog(null, comBeatsPlayerSBP,
-                            "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                            0, sbpIcon);
+                JOptionPane.showMessageDialog(null, playerBeatsComRBS,
+                        "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
+                        0, rbsIcon);
 
-                    computerPoints += 1;
-
-
-                } else if (computerChoice.equals(paper) && playerChoice.equals(rock)) {
-
-                    String comBeatsPlayerPBR = decisions;
-                    comBeatsPlayerPBR += computerWin;
-                    comBeatsPlayerPBR += pBr;
-
-                    JOptionPane.showMessageDialog(null, comBeatsPlayerPBR,
-                            "Rock, Paper, Scissors                      " +
-                                    "                           J.LaCombe and L. Hoffpauer",
-                            0, pbrIcon);
-
-                    computerPoints += 1;
-
-
-                } else if (computerChoice.equals(rock) && playerChoice.equals(scissor)) {
-
-                    decisions = "\n\t\t\t\t\t\tYou played : " + playerChoice +
-                            "\n\t\tComputer Played : " + computerChoice + "\n";
-
-                    String comBeatsPlayerRBS = "                " + decisions;
-                    comBeatsPlayerRBS += "   " + computerWin;
-                    comBeatsPlayerRBS += "\n" + rBs;
-
-                    JOptionPane.showMessageDialog(null, comBeatsPlayerRBS,
-                            "Rock, Paper, Scissors                      " +
-                                    "                 J.LaCombe and L. Hoffpauer",
-                            0, rbsIcon);
-
-                    computerPoints += 1;
-
-
-                } else if (computerChoice.equals(paper) && playerChoice.equals(scissor)) {
-
-                    decisions = "        You played : " + playerChoice +
-                            "\n           Computer Played : " + computerChoice + "\n";
-
-                    String playerBeatsComSBP = decisions;
-                    playerBeatsComSBP += "\n" + playerWin;
-                    playerBeatsComSBP += "\n" + sBp;
-
-                    JOptionPane.showMessageDialog(null, playerBeatsComSBP,
-                            "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                            0, sbpIcon);
-
-                    playerPoints += 1;
-
-
-                } else if (computerChoice.equals(rock) && playerChoice.equals(paper)) {
-
-                    String playerBeatsComPBR = decisions;
-                    playerBeatsComPBR += "\n" + playerWin;
-                    playerBeatsComPBR += "\n" + pBr;
-
-                    JOptionPane.showMessageDialog(null, playerBeatsComPBR,
-                            "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                            0, pbrIcon);
-
-                    playerPoints += 1;
-
-
-                } else if (computerChoice.equals(scissor) && playerChoice.equals(rock)) {
-
-                    decisions = "     You played : " + playerChoice +
-                                "\n                  Computer Played : " + computerChoice + "\n";
-
-                    String playerBeatsComRBS = "                " + decisions;
-                    playerBeatsComRBS += "   " + playerWin;
-                    playerBeatsComRBS += "\n" + rBs;
-
-                    JOptionPane.showMessageDialog(null, playerBeatsComRBS,
-                            "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                            0, rbsIcon);
-
-                    playerPoints += 1;
-
-                }
-
-                String winner = "";
-
-                if (playerPoints == 3) {
-                    winner = "P";
-                }
-
-                else if (computerPoints == 3) {
-                    winner = "C";
-                }
-
-                String finalScore = "Your Score: " + playerPoints
-                        + "\n" + "Computer Score: " + computerPoints;
-
-                String[] quitGame = {"Quit Game"};
-
-                if (winner.equals("P")) {
-
-                    String playerWinsGame = finalScore + "\n";
-                    playerWinsGame += "<html><h1>You Won!<h1><html>\n";
-                    playerWinsGame += "Please click the \"Quit Game\" button to end the game\n";
-                    playerWinsGame += "Thanks For Playing!\n";
-
-                    JOptionPane.showOptionDialog(null, playerWinsGame,
-                            "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                            0, 0, quitIcon, quitGame, quitGame[0]);
-                System.exit(1);}
-
-                else if (winner.equals("C")) {
-
-                    String comWinsGame = "<html><h1>You lost :( <h1><html>";
-                    comWinsGame += "Please click the \"Quit Game\" button to end the game";
-                    comWinsGame += "Thanks For Playing! Better Luck Next Time!";
-                    comWinsGame += "Thanks For Playing! Better Luck Next Time!";
-
-
-
-                    JOptionPane.showOptionDialog(null, comWinsGame,
-                            "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
-                            0, 0, quitIcon, quitGame, quitGame[0]);
-                System.exit(1);}
+                playerPoints += 1;
 
             }
+
+            String winner = "";
+
+            if (playerPoints == 3) {
+                winner = "P";
+            } else if (computerPoints == 3) {
+                winner = "C";
+            }
+
+            String finalScore = "<html><p>Your Score: " + playerPoints + "<br>"
+                    + "Computer Score: " + computerPoints + "</p>";
+
+            String[] quitGame = {"Quit Game"};
+
+            if (winner.equals("P")) {
+
+                String playerWinsGame = finalScore + "<h1>You Won!</h1>" + "<p>Please click the \"Quit Game\" button to end the game.</p>";
+                playerWinsGame += "<h1>Thanks For Playing!<h1>";
+
+                JOptionPane.showOptionDialog(null, playerWinsGame,
+                        "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
+                        0, 0, quitIcon, quitGame, quitGame[0]);
+
+                System.exit(1);
+
+            } else if (winner.equals("C")) {
+
+                String comWinsGame = finalScore + "<h1>You lost :(  </h1>" +
+                        "<p>Please click the \"Quit Game\" button to end the game  <br>" +
+                        "Thanks For Playing! Better Luck Next Time!  <br></p>";
+
+
+                JOptionPane.showOptionDialog(null, comWinsGame,
+                        "Rock, Paper, Scissors                             J.LaCombe and L. Hoffpauer",
+                        0, 0, quitIcon, quitGame, quitGame[0]);
+                System.exit(1);
+            }
+
+        }
 
     }
 
